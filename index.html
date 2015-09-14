@@ -26,8 +26,8 @@
 
 	<!-- 自定义按钮组 -->
 	<div id="btns" class="btn-group" role="group" aria-label="...">
-		<button type="button" class="btn btn-default" onclick="getArray()">getRows</button>
-		<button type="button" class="btn btn-default" onclick="">doNothing</button>
+		<button type="button" class="btn btn-default" onclick="getArray()" >getRows</button>
+		<button type="button" class="btn btn-default" onclick="" >doNothing</button>
 	</div>
 
 </body>
@@ -104,7 +104,6 @@
 		    ['Other browsers','All others','-','-','U']
 		];
 
-		 
 	    var table = $( tableId ).DataTable( {
 	        "data": dataSet,
 	        "columns": [
@@ -119,10 +118,10 @@
 	    } );
 
 	    // 演示如何向已实例化的datatables中加入自定义按钮组
-	    $( tableId ).addButtons($('#btns'),"top");
+	    $( tableId ).addButtons($('#btns'),"top")
 
 	    // tabale允许表单行被选中，并只允许选中单行
-	    $( tableId ).allowSelect('single');
+	    .allowSelect($('#btns'));
 
 
      

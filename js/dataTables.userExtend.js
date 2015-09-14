@@ -89,7 +89,7 @@ $.extend( $.fn.dataTable.defaults, {
 
 
 		/**
-		 * [允许表单被选中]
+		 * [允许表单行数据被选中，并控制自定义按钮禁用或启用]
 		 * @Author   Moer
 		 * @DateTime 2015-09-13T16:05:28+0800
 		 * @param    {[type] = jQuery elements}     relateButtons 	[有选中状态才会激活的自定义按钮]
@@ -124,10 +124,21 @@ $.extend( $.fn.dataTable.defaults, {
 			// 对传入进来的relateButtons进行处理，找出哪些是禁用的
 			// 如果它本身非禁用，则判断它为按钮组的父容器，然后在里面继续查找禁用的按钮
 			if (relateButtons !== undefined && !relateButtons.is(':disabled')) {
-				relateButtons = relateButtons.children('*:disabled');
-				if (relateButtons.length <= 0) {
-					relateButtons.children('*');
-					console.warn('html标签中没有定义初始禁用的按钮组，默认初始化所有按钮都为禁用');
+				var childBtn = relateButtons.children('*');
+				
+				if (childBtn.length > 0) {
+					var childBtn_dis = relateButtons.find(':disabled');
+					
+					if (childBtn_dis.length === 0) {
+						childBtn.attr('disabled', true);
+						relateButtons = childBtn;
+
+					}else{
+						relateButtons = childBtn_dis;
+					}
+
+				}else{
+					relateButtons.attr('disabled', true);
 				}
 			}
 
