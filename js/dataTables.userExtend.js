@@ -29,10 +29,7 @@ $.extend( $.fn.dataTable.defaults, {
             "sSortAscending": ": 以升序排列此列",
             "sSortDescending": ": 以降序排列此列"
         }
-    },
-
-    //使用自定义功能，必须将datatables布局成这个类型
-    "dom": 'frtip' 
+    }
 });
 
 
@@ -53,32 +50,36 @@ $.extend( $.fn.dataTable.defaults, {
 		 */
 	    addButtons:function ($btnGroup,domId) {
 	    	var tableId = "#" + this.attr('id');
+	    	var table_wrapper = $(tableId + "_wrapper");//实例化的datatable父容器
 
-			var direction = 'left' ; //默认的按钮浮动方向
+	    	//默认的按钮布局方向
+			var direction = 'left' ; 
 			if (domId.indexOf('-r')>=0) {
 				direction = 'right' ; 
 			}
 
 			// 将按钮组添加到datatable的左上角或者右下角
 			if (domId===undefined || domId.indexOf('top')>=0) {
-				domId="_filter";//datatable默认生成的上容器，含搜索框
-				setFloat (direction);
-			}
-			else if (domId.indexOf('bottom')>=0) {
-				domId="_paginate";//datatable默认生成的下容器，含页码
-				setFloat (direction);
-			}
-
-			// 将自定义按钮组加入到table的默认头部容器中
-			$( tableId + "_wrapper " + tableId + domId  ).prepend( $btnGroup );
-
-			// 对自定义按钮和他的父容器进行排序
-			function setFloat (direction) {
-				$btnGroup.css('float', direction);
-				if (direction==='right') {
-					$( tableId + domId ).css('text-align', 'left');
+				if (direction === 'left') {
+					domId = table_wrapper.children('.row').first().children('div').first();
+				}else{
+					domId = table_wrapper.children('.row').first().children('div').last();
 				}
 			}
+			else if (domId.indexOf('bottom')>=0) {
+				if (direction === 'left') {
+					domId = table_wrapper.children('.row').last().children('div').first();
+				}else{
+					domId = table_wrapper.children('.row').last().children('div').last();
+				}
+			}
+
+			// 将按钮组放入
+			domId.prepend( $btnGroup );
+
+			// 按钮组布局方向调整
+			$btnGroup.wrap('<div class="btnGroup-wrapper" style="text-align:'+direction+'"></div>');
+
 
 			return this;
 		},
