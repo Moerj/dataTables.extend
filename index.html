@@ -87,23 +87,11 @@
 	    } );
 
 	    // 演示如何向已实例化的datatables中加入自定义按钮组
-	    $( tableId ).addButtons($('#btns'),"top")
+	    $( tableId ).addButtons('#btns',"top")
 
 	    // tabale允许表单行被选中，并只允许选中单行
-	    .allowSelect($('#btns'));
+	    .allowSelect('#btns',"single");
 
 
-     
-
-     	// 获取选中的行数组
-        function getArray () {
-        	var array = [];
-        	$(tableId).find('.info').each(function(index, el) {
-        		var data = table.rows('.info').data()[index] ;
-        		array.push(data);
-        	});
-        	console.log( array );
-        }
-		
 	</script>
 </html>
