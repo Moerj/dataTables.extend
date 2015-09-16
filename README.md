@@ -5,6 +5,7 @@ dataTables的自定义扩展
 2.添加自定义按钮。
 3.允许表单被选中。
 
+<br>
 
 <h2>Getting Started</h2>
 在使用前，你需要引入jQuery和datatables的主js
