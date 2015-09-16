@@ -26,8 +26,8 @@
 
 	<!-- 自定义按钮组 -->
 	<div id="btns" class="btn-group" role="group" aria-label="...">
-		<button type="button" class="btn btn-default" onclick="getArray()" >getRows</button>
-		<button type="button" class="btn btn-default" onclick="" >doNothing</button>
+		<button type="button" class="btn btn-default" onclick="getArray()" >按钮1</button>
+		<button type="button" class="btn btn-default" onclick="" >按钮2</button>
 	</div>
 
 </body>
@@ -43,7 +43,6 @@
 
 	<!-- DEOM部分 -->
 	<script>
-		var tableId = '#example';
 		var dataSet = [
 		    ['Trident','Internet Explorer 4.0','Win 95+','4','X'],
 		    ['Trident','Internet Explorer 5.0','Win 95+','5','C'],
@@ -73,7 +72,7 @@
 		    ['Gecko','Epiphany 2.20','Gnome','1.8','A']
 		];
 
-	    var table = $( tableId ).DataTable( {
+	    $( '#example' ).dataTable( {
 	        "data": dataSet,
 	        "columns": [
 	            { "title": "Engine" },
@@ -84,13 +83,13 @@
 	        ],
 	        // 去掉每页显示多少条数据选项
 	        "lengthChange":false
-	    } );
+	    } )
 
 	    // 演示如何向已实例化的datatables中加入自定义按钮组
-	    $( tableId ).addButtons('#btns',"top")
+	    .addButtons('#btns',"top")
 
-	    // tabale允许表单行被选中，并只允许选中单行
-	    .allowSelect('#btns',"single");
+	    // tabale允许表单行被选中，并只允许选中多行+拖拽多选
+	    .allowSelect('#btns',"multiple");
 
 
 	</script>
