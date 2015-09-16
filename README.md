@@ -50,9 +50,15 @@ direction(可选)：定义传入的按钮在datatable中的布局，
 relateButtons(可选)：指定选中行以后哪些按钮会启用，未选择行则禁用。 
 
 selectMode(可选)：对datatables行进行选中操作的模式，
-"single"只允许单选、"multiple"允许多选并可拖拽连选。默认为可多选，但不支持拖拽。
+"single"只允许单选、"multiple"允许多选并可拖拽连选，此模式下文本选择失效。
+不定义则默认可多选，但不支持拖拽。
 
 selectedClass(可选)：定义选中行后对其添加的class类名，以达到行颜色目的，
 默认取公共element.selectedClass定义的类名。
 
 
+<br>
+
+<b>定义全局的选中行样式</b>
+
+	.selectedClass( className )
