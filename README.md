@@ -1,4 +1,4 @@
-# dataTables.userExtend
+# dataTables.extend
 dataTables的自定义扩展
 
 1.汉化datatables。
