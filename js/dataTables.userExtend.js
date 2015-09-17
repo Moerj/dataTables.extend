@@ -123,7 +123,7 @@ $.extend( $.fn.dataTable.defaults, {
 
 			} else if (selectMode === "multiple"){//多选模式，可拖拽连选
 				isMousedown = false;//隐式声明开关变量，记录鼠标按下
-				tbody.find('tr').css('user-select', 'none');//禁止拖拽时选中文本
+				tbody.css('user-select', 'none');//禁止拖拽时选中文本
 
 				// 拖拽事件
 				tbody.on( 'mousedown', 'tr', function () {
