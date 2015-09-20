@@ -69,3 +69,7 @@ selectedClass(可选)：定义选中行后对其添加的class类名，以达到
 <b>定义全局的选中行样式</b>
 
 	$.fn.selectedClass( className )
+
+<br>
+<h3>Let's work together</h3>
+http://moerj.com
