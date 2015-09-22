@@ -170,6 +170,11 @@ $.extend( $.fn.dataTable.defaults, {
 				}else{
 					relateButtons.attr('disabled', true);
 				}
+
+				// 表格重绘时，重置需要禁用的按钮
+				this.on('draw.dt', function() {
+					relateButtons.attr('disabled', true);
+				});
 			}
 			
 
