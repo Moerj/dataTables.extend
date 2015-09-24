@@ -102,6 +102,7 @@ $.extend( $.fn.dataTable.defaults, {
 		 */
 		allowSelect: function ( relateButtons, selectMode, selectedClass ) {
 			var	tbody = this.find('tbody');
+			var mouseEvent = 'click';
 
 			// 确保传入的按钮是jQuery对象，这样就可兼容传入id或class字符串
     		relateButtons = $(relateButtons);
@@ -110,7 +111,6 @@ $.extend( $.fn.dataTable.defaults, {
 			if ( selectedClass === undefined ) {
 				selectedClass = this.selectedClass ;
 			}
-
 
 			// 配置选择模式
 			if (selectMode === "single") {//单选模式
@@ -124,14 +124,15 @@ $.extend( $.fn.dataTable.defaults, {
 			} else if (selectMode === "multiple"){//多选模式，可拖拽连选
 				isMousedown = false;//隐式声明开关变量，记录鼠标按下
 				tbody.css('user-select', 'none');//禁止拖拽时选中文本
+				mouseEvent = 'mousedown';//冒泡事件更改
 
 				// 拖拽事件
-				tbody.on( 'mousedown', 'tr', function () {
+				tbody.on( 'mousedown', 'tr', function () {//点击
 				    isMousedown = true;
 				    $(this).toggleClass( selectedClass );
 				    relate ();
 				} )
-				.on( 'mouseenter', 'tr', function () {
+				.on( 'mouseenter', 'tr', function () {//移动拖拽
 				    if (isMousedown === true) {
 				    	$(this).toggleClass( selectedClass );
 				    	relate ();
@@ -149,6 +150,13 @@ $.extend( $.fn.dataTable.defaults, {
 				    relate ();
 				} );
 			}
+
+
+			// 防止表格内按钮点击冒泡
+			tbody.on( mouseEvent, 'tr button,a,input[type=button]', function(event) {
+				// console.log('阻止冒泡');
+				return false;
+			});
 
 
 			// 对传入进来的relateButtons进行处理，找出哪些是禁用的
@@ -191,7 +199,7 @@ $.extend( $.fn.dataTable.defaults, {
 			}
 
 			return this;
-		}	
+		}
 
 	});  
 })(jQuery);
